@@ -28,6 +28,9 @@
 
 import spacy
 
+
+
+
 def main():
     # Load English tokenizer, tagger, parser and NER
     nlp = spacy.load("es_core_news_lg")
@@ -41,11 +44,24 @@ def main():
             print("¡¡Adios!!")
             break
 
-        doc = nlp(user_input)
+        doc = nlp(user_input.replace("No "," negar ").replace(" no ", " negar ").replace("Si "," afirmar ").replace(" si "," afirmar "))
         # Analyze syntax
-        print("Sustantivos:", [chunk.text for chunk in doc.noun_chunks])
-        print("Verbs:", [token.lemma_ for token in doc if token.pos_ == "VERB"])
-        print("Entidades", doc.ents)
+  #      print("Sustantivos:", [chunk.text for chunk in doc.noun_chunks])
+  #      print("Verbs:", [token.lemma_ for token in doc if token.pos_ == "VERB"])
+  #      print("Entidades", doc.ents)
+
+        sentencias = list(doc.sents)
+        for sentencia in sentencias:
+            print("Nueva oracion")
+            for token in sentencia:
+                if token.text == "no" or not token.is_stop:
+                    print(token.lemma_,"\tPOS", token.pos_,"\tTAG", token.tag_,"\tDEP",token.dep_)
+        for ent in doc.ents:
+            # Imprime en pantalla el texto y la etiqueta de la entidad
+            print(ent.text, ent.label_)
+
+        #print(spacy.explain("PROPN"))
+
 
 def mensajesBienvenida():
     print("------------------------------------")
