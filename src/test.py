@@ -33,7 +33,9 @@ def lenguajes_component_function(doc):
 # Procesa el texto e imprime en pantalla el texto y el label
 # de los doc.ents
 
-doc = nlp("Un programador tiene una premonición de que vive programando haciendo programas para poder promocionar una materia")
+doc = nlp("Un programador tiene una premonición de que vive programando haciendo programas para poder promocionar una materia. Aveces soñaba que programaba dentro de un programa")
+
+#doc = nlp("Actualmente estoy viviendo en Santa fe, Argentina, me gustaría vivir en San Pablo, Brasil")
 
 print("Verbs:", [token.lemma_ for token in doc if token.pos_ == "VERB"])
 
@@ -45,9 +47,10 @@ print([(ent.text, ent.label_) for ent in doc.ents])
 for token in doc:
     if token.text == "no" or not token.is_stop:
         #print(token.lemma_, "\tPOS", token.pos_, "\tTAG", token.tag_, "\tDEP", token.dep_)
-        print(token.text,"<->", tokenObjetivo.text,tokenObjetivo.similarity(token),tokenObjetivo.similarity(token) >= 0.5)
-#print("------Entidades y label-------------")
-#for entidad in doc.ents:
-   # print("\tPalabra", entidad.text, "\tLabel", entidad.label_)
+        if (tokenObjetivo.similarity(nlp(token.lemma_)[0]) >= 0.5):
+            print(token.text,">",token.lemma_,"<->", tokenObjetivo.text)
+print("------Entidades y label-------------")
+for entidad in doc.ents:
+    print("\tPalabra", entidad.text, "\tLabel", entidad.label_)
 
 
