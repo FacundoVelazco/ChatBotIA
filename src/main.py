@@ -55,7 +55,8 @@ def main():
             print("Nueva oracion")
             for token in sentencia:
                 #if token.text == "no" or not token.is_stop:
-                print(token.text, token.dep_, token.head.text, token.head.pos_,token.lemma_,[child for child in token.children])
+                print(token.head.text)
+                #print(token.text, token.dep_, token.head.text, token.head.pos_,token.lemma_,[child for child in token.children])
         for ent in doc.ents:
             # Imprime en pantalla el texto y la etiqueta de la entidad
             print(ent.text, ent.label_)
