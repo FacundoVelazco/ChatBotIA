@@ -50,7 +50,7 @@ def getClauses():
     clauses.append(aima3.utils.expr("Lenguaje(Dart)"))
     clauses.append(aima3.utils.expr("Lenguaje(MySQL)"))
     clauses.append(aima3.utils.expr("Lenguaje(MongoDB)"))
-    clauses.append(aima3.utils.expr("Lenguaje(mariaDB)"))
+    clauses.append(aima3.utils.expr("Lenguaje(MariaDB)"))
     clauses.append(aima3.utils.expr("Lenguaje(Sql)"))
 
     clauses.append(aima3.utils.expr("Framework(React)"))
