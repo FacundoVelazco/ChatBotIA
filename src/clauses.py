@@ -12,6 +12,23 @@ def getClauses():
 
     clauses.append(aima3.utils.expr("Lenguaje(x) ==> LengUser(x)"))
     clauses.append(aima3.utils.expr("Framework(x) ==> FrameUser(x)"))
+    clauses.append(aima3.utils.expr("Experiencia(x) ==> ExpLengUser(x)"))
+    clauses.append(aima3.utils.expr("Experiencia(x) ==> ExpFrameUser(x)"))
+
+
+
+
+
+
+
+    clauses.append(aima3.utils.expr("Orientacionuser(Frontend) & ExpFrameUser(Junior) ==> Puesto(Frontend)"))
+    clauses.append(aima3.utils.expr("Puesto(Backend)"))
+    clauses.append(aima3.utils.expr("Puesto(Fullstack)"))
+    clauses.append(aima3.utils.expr("Puesto(DBA)"))
+    clauses.append(aima3.utils.expr("Puesto(TeamLeader)"))
+    clauses.append(aima3.utils.expr("Puesto(SoftwareEngineerManager)"))
+    clauses.append(aima3.utils.expr("Puesto(ChiefTechnologyOfficer)"))
+    clauses.append(aima3.utils.expr("Puesto(CTO)"))
 
     #-------------------
 
@@ -109,6 +126,7 @@ def getClauses():
 
     clauses.append(aima3.utils.expr("Orientacion(Backend)"))
     clauses.append(aima3.utils.expr("Orientacion(Frontend)"))
+    clauses.append(aima3.utils.expr("Orientacion(Dba)"))
 
     clauses.append(aima3.utils.expr("LengOrientado(Python,Backend)"))
     clauses.append(aima3.utils.expr("LengOrientado(Java,Backend)"))
@@ -273,15 +291,6 @@ def getClauses():
     clauses.append(aima3.utils.expr("CiudadPais(Salto,Uruguay)"))
     clauses.append(aima3.utils.expr("CiudadPais(Piriápolis,Uruguay)"))
 
-    clauses.append(aima3.utils.expr("Puesto(Frontend)"))
-    clauses.append(aima3.utils.expr("Puesto(Backend)"))
-    clauses.append(aima3.utils.expr("Puesto(Fullstack)"))
-    clauses.append(aima3.utils.expr("Puesto(DBA)"))
-    clauses.append(aima3.utils.expr("Puesto(TeamLeader)"))
-    clauses.append(aima3.utils.expr("Puesto(SoftwareEngineerManager)"))
-    clauses.append(aima3.utils.expr("Puesto(ChiefTechnologyOfficer)"))
-    clauses.append(aima3.utils.expr("Puesto(CTO)"))
-
     clauses.append(aima3.utils.expr("Experiencia(Senior)"))
     clauses.append(aima3.utils.expr("Experiencia(Semi-senior)"))
     clauses.append(aima3.utils.expr("Experiencia(Junior)"))
@@ -302,6 +311,38 @@ def getClauses():
     clauses.append(aima3.utils.expr("Disponibilidad(Full-time)"))
     clauses.append(aima3.utils.expr("Disponibilidad(Freelance)"))
 
+    clauses.append(aima3.utils.expr("TrabajoenEquipo(Lider)"))
+    clauses.append(aima3.utils.expr("TrabajoenEquipo(Referente)"))
+    clauses.append(aima3.utils.expr("TrabajoenEquipo(Colaborador)"))
+
+    clauses.append(aima3.utils.expr("CoordinacionEquipos(Colaborador)"))
+    clauses.append(aima3.utils.expr("CoordinacionEquipos(Lider)"))
+
+    clauses.append(aima3.utils.expr("Optimizaciones(Cpu)"))
+    clauses.append(aima3.utils.expr("Optimizaciones(Memoria)"))
+    clauses.append(aima3.utils.expr("Optimizaciones(Disco)"))
+    clauses.append(aima3.utils.expr("Optimizaciones(Navegador)"))
+
+    clauses.append(aima3.utils.expr("browser(Firefox)"))
+    clauses.append(aima3.utils.expr("browser(Chrome)"))
+    clauses.append(aima3.utils.expr("browser(Safari)"))
+
+
+
+    clauses.append(aima3.utils.expr("OptimizaOrientacion(Cpu,BackEnd)"))
+    clauses.append(aima3.utils.expr("OptimizaOrientacion(Memoria,FrontEnd)"))
+    clauses.append(aima3.utils.expr("OptimizaOrientacion(Navegador,FrontEnd)"))
+    clauses.append(aima3.utils.expr("OptimizaOrientacion(Disco,BackEnd)"))
+    clauses.append(aima3.utils.expr("OptimizaOrientacion(Cpu,Dba)"))
+
+    clauses.append(aima3.utils.expr("Sueldo(Bajo)"))
+    clauses.append(aima3.utils.expr("Sueldo(Medio)"))
+    clauses.append(aima3.utils.expr("Sueldo(Alto)"))
+
+    clauses.append(aima3.utils.expr("Arquitectura(Cloud)"))
+    clauses.append(aima3.utils.expr("Arquitectura(Ondemand)"))
+
+
 
 
     return clauses
@@ -315,17 +356,17 @@ def initKB():
 if __name__ == '__main__':
     KB = initKB()
 
-    #consulta = aima3.utils.expr("LengUser(Java)")
+    consulta = aima3.utils.expr("LengUser(Java)")
     #La afirmación es falsa(no esta explicita en la BC). KB.ask = {v_5: Java}
 
-    consulta = aima3.utils.expr("LengUser(Pepe)")
-
+    #consulta = aima3.utils.expr("LengUser(Pepe)")
+    #La afirmación es falsa.(no esta explicita en la BC) KB.ask = False ( no se deduce de las reglas)
 
 
     if pl_resolution(KB, consulta):
-        print("La afirmación es verdadera")
+        print("Esta en la BC")
     else:
-        print("La afirmación es falsa")
+        print("No esta en la BC")
 
     print("KB.ask= ", KB.ask(consulta))
     print(KB.ask(aima3.utils.expr('LengUser(Pepe)')))
