@@ -42,25 +42,46 @@ def main():
             print("¡¡Adios!!")
             break
 
-        doc = nlp(
-            user_input.replace("No ", " negar ").replace(" no ", " negar ").replace("Si ", " afirmar ").replace(" si ",
-                                                                                                                " afirmar "))
+        ##Para cuando queramos trabajar con negaciones/afirmaciones.
+        #doc = nlp(user_input.replace("No ", " negar ").replace(" no ", " negar ").replace("Si ", " afirmar ").replace(" si "," afirmar "))
         # Analyze syntax
         #      print("Sustantivos:", [chunk.text for chunk in doc.noun_chunks])
         #      print("Verbs:", [token.lemma_ for token in doc if token.pos_ == "VERB"])
         #      print("Entidades", doc.ents)
 
+        doc = nlp(user_input)
+        print("Lista sentencias ::")
         sentencias = list(doc.sents)
         for sentencia in sentencias:
-            print("Nueva oracion")
+            print("Sentencia :: ----------------------")
+            conjuntoHead = set()
+            conjuntoVERB = set()
+            conjuntoPROPN = set()
+            conjuntoADJ = set()
+            conjuntoNOUN = set()
+            conjuntoNUM = set()
+            listaEntidades = list()
+            for ent in sentencia.ents:
+                listaEntidades.append([ent.text,ent.label_])
             for token in sentencia:
-                if token.text == "no" or not token.is_stop:
-                    print(token.lemma_, "\tPOS", token.pos_, "\tTAG", token.tag_, "\tDEP", token.dep_)
-        for ent in doc.ents:
-            # Imprime en pantalla el texto y la etiqueta de la entidad
-            print(ent.text, ent.label_)
-
-        # print(spacy.explain("PROPN"))
+                conjuntoHead.add(token.head.text)
+                if token.pos_ == "VERB" :
+                    conjuntoVERB.add(token.lemma_)
+                if token.pos_ == "PRONP":
+                    conjuntoPROPN.add(token.lemma_)
+                if token.pos_ == "ADJ":
+                    conjuntoADJ.add(token.lemma_)
+                if token.pos_ == "NOUN":
+                    conjuntoNOUN.add(token.lemma_)
+                if token.pos_ == "NUM":
+                    conjuntoNUM.add(token.lemma_)
+            print(conjuntoHead)
+            print(conjuntoVERB)
+            print(conjuntoPROPN)
+            print(conjuntoADJ)
+            print(conjuntoNOUN)
+            print(conjuntoNUM)
+            print(listaEntidades)
 
 
 def mensajesBienvenida():
