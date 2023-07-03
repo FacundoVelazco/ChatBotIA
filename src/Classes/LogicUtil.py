@@ -8,8 +8,9 @@ class LogicUtil:
     def __init__(self):
         self.KB = aima3.logic.FolKB(getClausses())
 
-    def tell(self,sentence:Sentence):
+    def tell(self,clausula:str):
+        self.KB.tell((aima3.utils.expr(clausula)))
         return None
-    def ask(self, sentence: Sentence):
-        return None
-
+    def ask(self, clausula:str):
+        resultado = self.KB.tell((aima3.utils.expr(clausula)))
+        return resultado
