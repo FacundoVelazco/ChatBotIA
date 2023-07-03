@@ -29,12 +29,10 @@ class Agent:
 
         # Cadena ingresada por el usuario
         last_raw_sentence = self.raw_sentence.__getitem__(len(self.raw_sentence) - 1)
-        print("Last raw sentence_________")
-        print(last_raw_sentence)
+
         # Cadenas procesada por spacy
         last_sentences = self.defSentences(last_raw_sentence)
-        print("Last sentence_________")
-        print(last_sentences[0])
+
         # TODO por ahora solo usamos la primer sentencia que nos envian, por una cuestion de simplificar el problema,
         #  se podria ampliar luego
         self.sentence.append(last_sentences[0])
@@ -102,25 +100,35 @@ class Agent:
             res = aima.ask("ModalidadUser(x)")
             if type(res) != bool:
                 for adj in res.values():
-                    if opcionesLocacion.count(normalizer(adj)):
+                    if opcionesLocacion.count(normalizer(adj.__str__())):
                         return Context(ContextName.LOCACION.name)
-                    if opcionesLocacion.count(normalizer(adj)):
+                    if opcionesLocacion.count(normalizer(adj.__str__())):
                         return Context(ContextName.MODALIDAD.name)
 
         if ContextName.LOCACION.name == context.context_name:
             found = False
             for entity in sentence.entidades:
-                clausulaCiudad = "Ciudad(" + normalizer(entity) + ")"
-                clausulaPais = "Pais(" + normalizer(entity) + ")"
+                clausulaCiudad = "Ciudad(" + normalizer(entity.text) + ")"
+                clausulaPais = "Pais(" + normalizer(entity.text) + ")"
                 if aima.askConditional(clausulaPais):
-                    aima.tell("EsDe(" + normalizer(entity) + ")")
+                    aima.tell("UserPais(" + normalizer(entity.text) + ")")
                     found = True
                     break
                 if aima.askConditional(clausulaCiudad):
-                    aima.tell("EsDe(" + normalizer(entity) + ")")
+                    aima.tell("UserCiudad(" + normalizer(entity.text) + ")")
                     found = True
                     break
             if found:
                 return Context(ContextName.DISPONIBILIDAD.name)
+
+        if ContextName.DISPONIBILIDAD.name == context.context_name:
+            for entity in sentence.entidades:
+                clausulaDisponibilidad = "Disponibilidad(" + normalizer(entity.text) + ")"
+                if aima.askConditional(clausulaDisponibilidad):
+                    aima.tell("DisponibilidadUser(" + normalizer(entity.text) + ")")
+                    return Context(ContextName.LENGUAJE.name)
+
+        if ContextName.LENGUAJE.name == context.context_name:
+            print("LENGUAJEE ASSEAESESA")
 
         return context

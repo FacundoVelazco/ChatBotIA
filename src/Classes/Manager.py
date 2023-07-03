@@ -9,7 +9,7 @@ class Manager:
         mensajesBienvenida()
         while True:
             contexto_previo = self.agent.context.__getitem__(len(self.agent.context)-1)
-            print(contexto_previo.context_name," ",contexto_previo.question)
+            print(contexto_previo.question[1])
 
             user_input = input("-- ")
 

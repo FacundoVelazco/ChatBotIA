@@ -9,8 +9,6 @@ def getQuestions():
 
     questions.append([ContextName.PRESENTACION, "Hola ¿Como te llamas?"])
     questions.append([ContextName.LENGUAJE, "En que Leguaje o framework ha trabajado?"])
-    questions.append([ContextName.LENGUAJE, "Que nivel de señority / experiencia posee en el lenguaje o framework? (Pasante /Junior / Semi-senior / Senior)"])
-    questions.append([ContextName.LENGUAJE, "En cuanto a desarrollo, con que tipos de optimizaciones esta familiarizado? (Cpu/ Memoria / Db /Navegador)"])
     questions.append([ContextName.LOCACION, "En que pais o Ciudad le gustaria trabajar?"])
     questions.append([ContextName.IDIOMA, "Posee manejo de alguna lengua extranjera? En que Idioma?"])
     questions.append([ContextName.MODALIDAD, "Posemos 3 tipos de modalidad de trabajo, Presencial, remoto o Mixto, cual es de su preferencia?"])
