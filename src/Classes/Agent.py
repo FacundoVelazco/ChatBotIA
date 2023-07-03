@@ -26,4 +26,5 @@ class Agent:
         self.context.append()
 
     def consult(self,sentence : Sentence):
-
+        #Ciertas condiciones para llevar a cabo la gestion de consultas a la KB.
+        self.aima
