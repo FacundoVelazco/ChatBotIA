@@ -1,11 +1,12 @@
 from Sentence import Sentence
-
+from LogicUtil import LogicUtil
 
 class Agent:
     def __init__(self):
         self.raw_sentence = list()
         self.context = list()
         self.sentence = list()
+        self.aima = LogicUtil()
 
     def addRawSentence(self, text: str):
         self.raw_sentence.append(text)
@@ -25,4 +26,4 @@ class Agent:
         self.context.append()
 
     def consult(self,sentence : Sentence):
-        #dasd
+
