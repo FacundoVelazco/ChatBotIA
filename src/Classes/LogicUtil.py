@@ -9,6 +9,7 @@ class LogicUtil:
         self.KB = aima3.logic.FolKB(Clausses.getClausses())
 
     def tell(self,sentence:Sentence):
-
+        return None
     def ask(self, sentence: Sentence):
+        return None
 
