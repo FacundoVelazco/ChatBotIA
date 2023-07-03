@@ -7,6 +7,12 @@ class ContextName(Enum):
     LENGUAJE = "LENGUAJE"
     LOCACION = "LOCACION"
     EXITO = "EXITO"
-
+    IDIOMA = "IDIOMA"
+    MODALIDAD = "MODALIDAD"
+    DISPONIBILIDAD = "DISPONIBILIDAD"
+    EQUIPO = "EQUIPO"
+    ARQUITECTURA = "ARQUITECTURA"
+    SUELDO = "SUELDO"
+    CEO = "CEO"
     def __str__(self):
         return f'{self.name}'
