@@ -1,7 +1,7 @@
 from Sentence import Sentence
 from LogicUtil import LogicUtil
 from Context import Context
-
+from EnumContextNames import ContextName
 class Agent:
     def __init__(self):
         self.raw_sentence = list()
@@ -9,7 +9,8 @@ class Agent:
         self.sentence = list()
         self.aima = LogicUtil()
 
-        #init_context = C
+        init_context = Context(ContextName.PRESENTACION.name)
+        self.context.append(init_context)
 
     def addRawSentence(self, text: str):
         self.raw_sentence.append(text)
