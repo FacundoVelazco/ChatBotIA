@@ -1,3 +1,6 @@
+#  Copyright (c) 2023.
+#  el copicopi
+
 # This is a sample Python script.
 
 # Press Mayús+F10 to execute it or replace it with your code.
@@ -25,12 +28,14 @@ def main():
     # Add rules and facts with tell
 
     # Get information from the knowledge base with ask
-    consulta = aima3.utils.expr("LengUser(Pepe)")
+    consulta = aima3.utils.expr("Lenguaje(x)")
 
-    if pl_resolution(KB, consulta):
-        print("La afirmación es verdadera")
-    else:
-        print("La afirmación es falsa")
+
+    print(pl_resolution(KB, consulta))
+    valor_string : dict = KB.ask(consulta)
+    print(valor_string.values())
+    for v in valor_string.values():
+        print(v.__str__()," ",type(v.__str__()))
 
     print("KB.ask= ", KB.ask(consulta))
 

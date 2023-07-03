@@ -2,7 +2,10 @@ from Classes.Sentence import Sentence
 from Classes.LogicUtil import LogicUtil
 from Classes.Context import Context
 from Classes.EnumContextNames import ContextName
+from Classes.Utils import normalizer
 import spacy
+import aima3.logic
+from aima3.logic import pl_resolution
 
 
 class Agent:
@@ -14,6 +17,9 @@ class Agent:
         init_context = Context(ContextName.PRESENTACION.name)
         self.context.append(init_context)
 
+    def getLastContext(self):
+        return self.context.__getitem__(len(self.context) - 1)
+
     def addRawSentence(self, text: str):
         self.raw_sentence.append(text)
 
@@ -23,22 +29,27 @@ class Agent:
 
         # Cadena ingresada por el usuario
         last_raw_sentence = self.raw_sentence.__getitem__(len(self.raw_sentence) - 1)
+        print("Last raw sentence_________")
+        print(last_raw_sentence)
         # Cadenas procesada por spacy
         last_sentences = self.defSentences(last_raw_sentence)
-        # Voy a usar solo la primera #TODO arreglar algun dia
+        print("Last sentence_________")
+        print(last_sentences[0])
+        # TODO por ahora solo usamos la primer sentencia que nos envian, por una cuestion de simplificar el problema,
+        #  se podria ampliar luego
         self.sentence.append(last_sentences[0])
         # Creamos un contexto nuevo y lo devolvemos.
-        new_context = self.consult(last_sentences[0], self.context.__getitem__(len(self.context) - 1))
+        new_context = self.consult(self.aima,last_sentences[0], self.context.__getitem__(len(self.context) - 1))
 
         self.context.append(new_context)
 
-    def defSentences(self, raw_sentence: str):
-        self.raw_sentence = raw_sentence
+    def defSentences(self, raws: str):
+        raw_sentence = raws
         processed_sentences = list()
 
         nlp = spacy.load("es_core_news_lg")
 
-        doc = nlp(self.raw_sentence)
+        doc = nlp(raw_sentence)
 
         sentencias = list(doc.sents)
 
@@ -51,7 +62,7 @@ class Agent:
             conjuntoNUM = set()
             listaEntidades = list()
             for ent in sentencia.ents:
-                listaEntidades.append([ent.text, ent.label_])
+                listaEntidades.append(ent)
             for token in sentencia:
                 conjuntoHead.add(token.head.text)
                 if token.pos_ == "VERB":
@@ -70,7 +81,46 @@ class Agent:
 
         return processed_sentences
 
-    def consult(self, sentence: Sentence, context: Context):
-        # Ciertas condiciones para llevar a cabo la gestion de consultas a la KB.
-        # TODO falta esto, logica de seleccion de aima y generacion de preguntas y nuevos contextos
-        return None
+    def consult(self,aima : LogicUtil,sentence: Sentence, context: Context):
+
+        # Consultar exito
+
+        if context.context_name == ContextName.PRESENTACION.name:
+            for entity in sentence.entidades:
+                if entity.label_ == "PER":
+                    aima.tell("Usuario(" + normalizer(entity.text) + ")")
+                    return Context(ContextName.MODALIDAD.name)
+
+        if context.context_name == ContextName.MODALIDAD.name:
+            for adj in sentence.adjetivos:
+                clausulaModalidad = "Modalidad(" + normalizer(adj) + ")"
+                if aima.askConditional(clausulaModalidad):
+                    aima.tell("ModalidadUser(" + normalizer(adj) + ")")
+
+            opcionesLocacion = ["Presencial", "Mixta"]
+            opcionesDisponibilidad = ["Virtual", "Remoto"]
+            res = aima.ask("ModalidadUser(x)")
+            if type(res) != bool:
+                for adj in res.values():
+                    if opcionesLocacion.count(normalizer(adj)):
+                        return Context(ContextName.LOCACION.name)
+                    if opcionesLocacion.count(normalizer(adj)):
+                        return Context(ContextName.MODALIDAD.name)
+
+        if ContextName.LOCACION.name == context.context_name:
+            found = False
+            for entity in sentence.entidades:
+                clausulaCiudad = "Ciudad(" + normalizer(entity) + ")"
+                clausulaPais = "Pais(" + normalizer(entity) + ")"
+                if aima.askConditional(clausulaPais):
+                    aima.tell("EsDe(" + normalizer(entity) + ")")
+                    found = True
+                    break
+                if aima.askConditional(clausulaCiudad):
+                    aima.tell("EsDe(" + normalizer(entity) + ")")
+                    found = True
+                    break
+            if found:
+                return Context(ContextName.DISPONIBILIDAD.name)
+
+        return context

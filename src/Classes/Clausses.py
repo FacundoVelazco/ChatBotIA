@@ -1,15 +1,16 @@
 import aima3.utils
 
+
 def getClausses():
     clausses = []
 
     # clausulas del usuario a BC
 
-    #1 - En que pais o Ciudad le gustaria trabajar?
-    #KB.tell(aima3.utils.expr("PaisUser(Unlugar)"))
-    #KB.tell(aima3.utils.expr("CiudadUser(Unlugar)"))
+    # 1 - En que pais o Ciudad le gustaria trabajar?
+    # KB.tell(aima3.utils.expr("PaisUser(Unlugar)"))
+    # KB.tell(aima3.utils.expr("CiudadUser(Unlugar)"))
 
-    #2 - En que Leguaje o framework ha trabajado?
+    # 2 - En que Leguaje o framework ha trabajado?
     # KB.tell(aima3.utils.expr("LengUser(unLenguaje)"))
     # KB.tell(aima3.utils.expr("CiudadUser(UnFramewok)"))
 
@@ -41,15 +42,12 @@ def getClausses():
     # 11 - Que nivel se sueldo espera percibir? (Bajo/Medio/Alto)
     # KB.tell(aima3.utils.expr("SueldoUser(unSueldo)"))
 
-    #12 - Durante su carrera en IT, ha tenido que tomar desiciones estatégias y/o técnicas a nivel departamental y/o organizacional? ( Si/No)
+    # 12 - Durante su carrera en IT, ha tenido que tomar desiciones estatégias y/o técnicas a nivel departamental y/o organizacional? ( Si/No)
     # KB.tell(aima3.utils.expr("MetasUser(unaMeta)"))
-
 
     clausses.append(aima3.utils.expr("LengUser(x) & LengOrientado(x,Backend) ==> Orientacionuser(Backend)"))
     clausses.append(aima3.utils.expr("LengUser(x) & LengOrientado(x,Frontend) ==> Orientacionuser(Frontend)"))
     clausses.append(aima3.utils.expr("LengUser(x) & LengOrientado(x,Dba) ==> Orientacionuser(Dba)"))
-
-
 
     # PUESTOS DISPONIBLES
 
@@ -59,7 +57,6 @@ def getClausses():
 
     clausses.append(aima3.utils.expr(
         "Orientacionuser(Frontend) & ExpFrameUser(Senior) & ExpLengUser(Senior) & ModalidadUser(Remoto) & SueldoUser(Medio) & IdiomasUser(Ingles) ==> Puesto(Frontend)"))
-
 
     # Puestos Backend
     clausses.append(aima3.utils.expr(
@@ -81,12 +78,11 @@ def getClausses():
     clausses.append(aima3.utils.expr(
         "Orientacionuser(Backend) & Orientacionuser(Frontend) & ExpLengUser(Semi_senior) & OptimizaUser(x) & IdiomasUser(Ingles) & ModalidadUser(Mixto) & RolMultiEquipoUser(Lider) & SueldoUser(Alto) ==> Puesto(Softwareengineermanager)"))
 
-
     # Puestos Cto
-    clausses.append(aima3.utils.expr("Puesto(SoftwareEngineerManager) & MetasUser(Si) & SueldoUser(Alto) ==> Puesto(Cto)"))
+    clausses.append(
+        aima3.utils.expr("Puesto(SoftwareEngineerManager) & MetasUser(Si) & SueldoUser(Alto) ==> Puesto(Cto)"))
 
-
-    #-------------------
+    # -------------------
 
     clausses.append(aima3.utils.expr("Lenguaje(Python)"))
     clausses.append(aima3.utils.expr("Lenguaje(Java)"))
@@ -315,14 +311,15 @@ def getClausses():
     clausses.append(aima3.utils.expr("Experiencia(Junior)"))
     clausses.append(aima3.utils.expr("Experiencia(Pasante)"))
 
-    clausses.append(aima3.utils.expr("Idioma(Inglés)"))
+    clausses.append(aima3.utils.expr("Idioma(Ingles)"))
     clausses.append(aima3.utils.expr("Idioma(Español)"))
     clausses.append(aima3.utils.expr("Idioma(Italiano)"))
-    clausses.append(aima3.utils.expr("Idioma(Portugués)"))
-    clausses.append(aima3.utils.expr("Idioma(Francés)"))
+    clausses.append(aima3.utils.expr("Idioma(Portugues)"))
+    clausses.append(aima3.utils.expr("Idioma(Frances)"))
     clausses.append(aima3.utils.expr("Idioma(Alemán)"))
 
     clausses.append(aima3.utils.expr("Modalidad(Presencial)"))
+    clausses.append(aima3.utils.expr("Modalidad(Remoto)"))
     clausses.append(aima3.utils.expr("Modalidad(Virtual)"))
     clausses.append(aima3.utils.expr("Modalidad(Mixta)"))
 
@@ -355,4 +352,26 @@ def getClausses():
     clausses.append(aima3.utils.expr("Arquitectura(Cloud)"))
     clausses.append(aima3.utils.expr("Arquitectura(Onpremise)"))
 
+    # Clausses de nombre de usuario
+    clausses.append(aima3.utils.expr("Usuario(x)"))
+    clausses.append(aima3.utils.expr("Pais(y) & Usuario(x) ==> EsDe(x,y)"))
+    clausses.append(aima3.utils.expr("Ciudad(y) & Usuario(x) ==> EsDe(x,y)"))
+
+    return clausses
+
+
+def presentationClausses():
+    clausses = list()
+    clausses.append("Usuario")
+    clausses.append("Pais")
+    clausses.append("Ciudad")
+    clausses.append("EsDe")
+    return clausses
+
+
+def locationClausses():
+    clausses = list()
+    clausses.append("Pais")
+    clausses.append("Ciudad")
+    clausses.append("EsDe")
     return clausses
