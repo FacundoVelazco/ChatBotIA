@@ -12,5 +12,5 @@ class LogicUtil:
         self.KB.tell((aima3.utils.expr(clausula)))
         return None
     def ask(self, clausula:str):
-        resultado = self.KB.tell((aima3.utils.expr(clausula)))
+        resultado = self.KB.ask((aima3.utils.expr(clausula)))
         return resultado
