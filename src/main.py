@@ -26,15 +26,12 @@
 # Important:: chequear bien que version de python se esta utilizando y que interprete,
 # muchas veces la version de terminal de comandos no es la misma que la de ejecucion en pycharm u otro IDE.
 
-import spacy
-from Classes.EnumContextNames import ContextName
-
+from Classes.Manager import Manager
 
 def main():
-    contextName = ContextName.PRESENTACION
+    manager = Manager()
 
-    print(contextName)
-    print(contextName.name)
+    manager.start()
 
     # Load English tokenizer, tagger, parser and NER
     # nlp = spacy.load("es_core_news_lg")

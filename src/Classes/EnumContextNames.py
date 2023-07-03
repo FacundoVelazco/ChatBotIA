@@ -2,7 +2,7 @@ from enum import Enum
 
 
 class ContextName(Enum):
-    #TODO añadir mas contextos nombrados
+    # TODO añadir mas contextos nombrados
     PRESENTACION = "PRESENTACION"
     LENGUAJE = "LENGUAJE"
     LOCACION = "LOCACION"
@@ -14,5 +14,6 @@ class ContextName(Enum):
     ARQUITECTURA = "ARQUITECTURA"
     SUELDO = "SUELDO"
     CEO = "CEO"
+
     def __str__(self):
         return f'{self.name}'

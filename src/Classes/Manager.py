@@ -1,4 +1,4 @@
-from Agent import Agent
+from Classes.Agent import Agent
 
 
 class Manager:
@@ -8,6 +8,9 @@ class Manager:
     def start(self):
         mensajesBienvenida()
         while True:
+            contexto_previo = self.agent.context.__getitem__(len(self.agent.context)-1)
+            print(contexto_previo.context_name," ",contexto_previo.question)
+
             user_input = input("-- ")
 
             if user_input == "x":
