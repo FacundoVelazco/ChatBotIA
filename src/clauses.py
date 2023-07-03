@@ -52,9 +52,9 @@ def getClauses():
 
 
 
-   # clauses.append(aima3.utils.expr("LengUser(x) & LengOrientado(x,Backend) ==> Orientacionuser(Backend)"))
-    #clauses.append(aima3.utils.expr("LengUser(x) & LengOrientado(x,Frontend) ==> Orientacionuser(Frontend)"))
-    #clauses.append(aima3.utils.expr("LengUser(x) & LengOrientado(x,Dba) ==> Orientacionuser(Dba)"))
+    clauses.append(aima3.utils.expr("LengUser(x) & LengOrientado(x,Backend) ==> Orientacionuser(Backend)"))
+    clauses.append(aima3.utils.expr("LengUser(x) & LengOrientado(x,Frontend) ==> Orientacionuser(Frontend)"))
+    clauses.append(aima3.utils.expr("LengUser(x) & LengOrientado(x,Dba) ==> Orientacionuser(Dba)"))
 
 
 
@@ -86,7 +86,7 @@ def getClauses():
 
     # Puestos SoftwareEngineerManager
     clauses.append(aima3.utils.expr(
-        "Orientacionuser(Backend) & Orientacionuser(Frontend) & ExpLengUser(Semi_senior) & OptimizaUser(x) & IdiomasUser(Ingles) & ModalidadUser(Mixto) & RolMultiEquipoUser(Lider) & SueldoUser(Alto) ==> Puesto(SoftwareEngineerManager)"))
+        "Orientacionuser(Backend) & Orientacionuser(Frontend) & ExpLengUser(Semi_senior) & OptimizaUser(x) & IdiomasUser(Ingles) & ModalidadUser(Mixto) & RolMultiEquipoUser(Lider) & SueldoUser(Alto) ==> Puesto(Softwareengineermanager)"))
 
 
     # Puestos Cto
@@ -384,9 +384,9 @@ if __name__ == '__main__':
 
 
 
-    consulta = aima3.utils.expr("Puesto(Dba)")
-   # consulta = aima3.utils.expr("LengUser(x)")
-    #consulta = aima3.utils.expr("LengOrientado(x,Dba)")
+
+    consulta = aima3.utils.expr("Puesto(Backend)")
+
 
 
     if pl_resolution(KB, consulta):
@@ -395,4 +395,14 @@ if __name__ == '__main__':
         print("No esta en la BC")
 
     print("KB.ask= ", KB.ask(consulta))
+
+
+# TEST
+    print("KB.ask= ", KB.ask(aima3.utils.expr("Puesto(Frontend)")))
+    print("KB.ask= ", KB.ask(aima3.utils.expr("Puesto(Backend)")))
+    print("KB.ask= ", KB.ask(aima3.utils.expr("Puesto(Fullstack)")))
+    print("KB.ask= ", KB.ask(aima3.utils.expr("Puesto(TeamLeader)")))
+    print("KB.ask= ", KB.ask(aima3.utils.expr("Puesto(Softwareengineermanager)")))
+    print("KB.ask= ", KB.ask(aima3.utils.expr("Puesto(Cto)")))
+
 
