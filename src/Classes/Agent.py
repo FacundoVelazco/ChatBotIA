@@ -1,5 +1,6 @@
 from Sentence import Sentence
 from LogicUtil import LogicUtil
+from Context import Context
 
 class Agent:
     def __init__(self):
@@ -7,6 +8,8 @@ class Agent:
         self.context = list()
         self.sentence = list()
         self.aima = LogicUtil()
+
+        #init_context = C
 
     def addRawSentence(self, text: str):
         self.raw_sentence.append(text)
