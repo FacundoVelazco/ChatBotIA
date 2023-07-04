@@ -51,9 +51,17 @@ def getClausses():
 
     # PUESTOS DISPONIBLES
 
+    clausses.append(aima3.utils.expr(
+        "Orientacionuser(Backend) & ModalidadUser(Presencial) & UserPais(Argentina) & DisponibilidadUser(Full-time) & TrabajoenEquipo(Lider)  ==> Puesto(TeamLeader)"))
+
+
+
     # Puestos FrontEnd
+
+
     clausses.append(aima3.utils.expr(
         "Orientacionuser(Frontend) & ExpFrameUser(Junior) & ExpLengUser(Junior) & ModalidadUser(Presencial) & SueldoUser(Bajo) ==> Puesto(Frontend)"))
+
 
     clausses.append(aima3.utils.expr(
         "Orientacionuser(Frontend) & ExpFrameUser(Senior) & ExpLengUser(Senior) & ModalidadUser(Remoto) & SueldoUser(Medio) & IdiomasUser(Ingles) ==> Puesto(Frontend)"))
@@ -71,6 +79,8 @@ def getClausses():
         "Orientacionuser(Dba) & ExpLengUser(Junior) & ModalidadUser(Presencial) & OptimizaUser(Db) ==> Puesto(Dba)"))
 
     # Puestos TeamLeader
+
+
     clausses.append(aima3.utils.expr(
         "Orientacionuser(X) & ExpFrameUser(Senior) & ExpLengUser(Senior) & ModalidadUser(Presencial) & IdiomasUser(Ingles) & RolEquipoUser(Lider) & SueldoUser(Medio)==> Puesto(TeamLeader)"))
 
@@ -321,7 +331,7 @@ def getClausses():
     clausses.append(aima3.utils.expr("Modalidad(Presencial)"))
     clausses.append(aima3.utils.expr("Modalidad(Remoto)"))
     clausses.append(aima3.utils.expr("Modalidad(Virtual)"))
-    clausses.append(aima3.utils.expr("Modalidad(Mixta)"))
+    clausses.append(aima3.utils.expr("Modalidad(Mixto)"))
 
     clausses.append(aima3.utils.expr("Disponibilidad(Part-time)"))
     clausses.append(aima3.utils.expr("Disponibilidad(Full-time)"))
@@ -351,6 +361,9 @@ def getClausses():
 
     clausses.append(aima3.utils.expr("Arquitectura(Cloud)"))
     clausses.append(aima3.utils.expr("Arquitectura(Onpremise)"))
+
+    clausses.append(aima3.utils.expr("Metas(Si)"))
+    clausses.append(aima3.utils.expr("Metas(No)"))
 
     # Clausses de nombre de usuario
     clausses.append(aima3.utils.expr("Usuario(x)"))

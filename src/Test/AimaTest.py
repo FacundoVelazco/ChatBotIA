@@ -28,7 +28,7 @@ def main():
     # Add rules and facts with tell
 
     # Get information from the knowledge base with ask
-    consulta = aima3.utils.expr("Lenguaje(x)")
+    consulta = aima3.utils.expr("Lenguaje(Java)")
 
 
     print(pl_resolution(KB, consulta))

@@ -1,4 +1,5 @@
 from Classes.Agent import Agent
+from Classes.EnumContextNames import ContextName
 
 
 class Manager:
@@ -8,10 +9,12 @@ class Manager:
     def start(self):
         mensajesBienvenida()
         while True:
-            contexto_previo = self.agent.context.__getitem__(len(self.agent.context)-1)
+            contexto_previo = self.agent.context.__getitem__(len(self.agent.context) - 1)
             print(contexto_previo.question[1])
-
-            user_input = input("-- ")
+            if (contexto_previo.context_name == ContextName.EXITO.name) or (contexto_previo.context_name == ContextName.FINAL.name):
+                user_input = "x"
+            else:
+                user_input = input("-- ")
 
             if user_input == "x":
                 print("¡¡Adios!!")

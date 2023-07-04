@@ -13,6 +13,7 @@ class ContextName(Enum):
     SUELDO = "SUELDO"
     CEO = "CEO"
     EXITO = "EXITO"
+    FINAL = "FINAL"
 
     def __str__(self):
         return f'{self.name}'
